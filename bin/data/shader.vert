@@ -26,8 +26,8 @@ void main()
 
     // use the displacement we created from the texture data
     // to modify the vertex position
-    modifiedPosition.y += displacementY * scale;
-
+    // modifiedPosition.y += (displacementY * scale) ;
+    modifiedPosition.w += (displacementY * scale);
     // this is the resulting vertex position
     gl_Position = modifiedPosition;
 

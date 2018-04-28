@@ -1,7 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
-
+#include "ofxOpenCv.h"
+#include "ofxGui.h"
+#include "ofxKinectV2.h"
 class ofApp : public ofBaseApp{
 
 	public:
@@ -31,5 +33,32 @@ class ofApp : public ofBaseApp{
     float                **r0;
     float                **r1;
     float                **r2;
-//    ofPixels bufferPixels;
+    ofxPanel gui;
+    ofxFloatSlider damping;
+    ofxFloatSlider scale;
+    
+    ofxFloatSlider offsetX;
+    ofxFloatSlider offsetY;
+    ofxFloatSlider offsetZ;
+    ofxFloatSlider power;
+    ofxFloatSlider distance;
+    ofxLabel fps;
+    bool bHide;
+    
+    vector < shared_ptr<ofxKinectV2> > kinects;
+    vector <ofTexture> texDepth;
+//    vector <ofTexture> texRGB;
+    
+    ofxCvColorImage            colorImg;
+    
+    ofxCvGrayscaleImage     grayImage;
+    ofxCvGrayscaleImage     grayBg;
+    ofxCvGrayscaleImage     grayDiff;
+    
+    ofxCvContourFinder     contourFinder;
+    
+    ofxFloatSlider                 threshold;
+    ofxToggle                bLearnBakground;
+    float coolDown;
+    ofEasyCam cam;
 };
