@@ -2,6 +2,7 @@
 
 // these are from the programmable pipeline system
 uniform mat4 modelViewProjectionMatrix;
+uniform float scale;
 in vec4 position;
 in vec2 texcoord;
 
@@ -17,7 +18,7 @@ void main()
     vec4 modifiedPosition = modelViewProjectionMatrix * position;
 
     // we need to scale up the values we get from the texture
-    float scale = 100;
+    
 
     // here we get the red channel value from the texture
     // to use it as vertical displacement

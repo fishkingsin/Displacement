@@ -1,0 +1,4 @@
+ofxGui
+ofxKinectV2
+ofxOpenCv
+ofxXmlSettings

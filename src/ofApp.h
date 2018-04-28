@@ -24,4 +24,12 @@ class ofApp : public ofBaseApp{
     ofShader shader;
     ofPlanePrimitive plane;
     ofImage busesImg;
+    
+    void findRipples();
+    void swapBuffers();
+    void makeRipples(float _x, float  _y);
+    float                **r0;
+    float                **r1;
+    float                **r2;
+//    ofPixels bufferPixels;
 };
