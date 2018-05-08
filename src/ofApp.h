@@ -4,6 +4,7 @@
 #include "ofxOpenCv.h"
 #include "ofxGui.h"
 #include "ofxKinectV2.h"
+#include "ofxSyphon.h"
 class ofApp : public ofBaseApp{
 
 	public:
@@ -25,7 +26,8 @@ class ofApp : public ofBaseApp{
     ofImage img;
     ofShader shader;
     ofPlanePrimitive plane;
-    ofImage busesImg;
+    ofImage sImage;
+    ofImage lImage;
     
     void findRipples();
     void swapBuffers();
@@ -42,6 +44,12 @@ class ofApp : public ofBaseApp{
     ofxFloatSlider offsetZ;
     ofxFloatSlider power;
     ofxFloatSlider distance;
+    ofxToggle fullScreen;
+    ofxToggle bMirror;
+    ofxIntSlider initBackground;
+    void toggleFullScreen(bool &b);
+    bool binitBackground;
+    
     ofxLabel fps;
     bool bHide;
     
@@ -58,7 +66,20 @@ class ofApp : public ofBaseApp{
     ofxCvContourFinder     contourFinder;
     
     ofxFloatSlider                 threshold;
+    ofxFloatSlider                 maxArea;
+    ofxFloatSlider                 minArea;
+    ofxFloatSlider                 cooldownInterval;
     ofxToggle                bLearnBakground;
     float coolDown;
-    ofEasyCam cam;
+    ofCamera cam;
+    ofFbo fbo;
+    ofFbo kinectsFbo;
+    ofFbo screenFbo;
+    ofPixels pixels;
+    ofImage dot;
+    ofxSyphonServer server;
+    
+    
+    
+    
 };
