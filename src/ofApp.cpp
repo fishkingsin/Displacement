@@ -93,7 +93,7 @@ void ofApp::setup(){
     cam.setVFlip(true);
     
 //    cam.disableMouseInput();
-//    server.setName("displacement");
+    server.setName("displacement");
     binitBackground = false;
     
 }
@@ -268,7 +268,7 @@ void ofApp::draw(){
     ofDisableAlphaBlending();
     ofSetColor(ofColor::white);
 //    screen.end();
-//    server.publishScreen();
+    server.publishScreen();
     if(bHide){
         fbo.draw(0, 0,128,128);
         img.draw(128, 0, 128,128);
@@ -281,7 +281,9 @@ void ofApp::draw(){
 //            texDepth[d].draw(200, shiftY);
 //
 //        }
-        grayImage.draw(256,0);
+        if(grayImage.bAllocated){
+            grayImage.draw(256,0);
+        }
         ofPushMatrix();
         ofTranslate(256, 0);
         contourFinder.draw();
