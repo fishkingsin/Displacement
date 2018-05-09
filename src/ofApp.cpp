@@ -16,7 +16,7 @@ float xm = 0, ym = 0;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetVerticalSync(true);
-    
+    ofEnableAntiAliasing();
     sImage.load("tunnel_s.png");
 #ifdef USE_VIDEO
     
@@ -48,8 +48,8 @@ void ofApp::setup(){
     shader.setUniformTexture("tex0", fbo, 0);
     float planeScale = 1;//0.85;
     int planeWidth = ofGetWidth() * planeScale;
-    int planeHeight = ofGetHeight() * planeScale;
-    int planeGridSize = 4;
+    int planeHeight = ofGetHeight() * planeScale * 1.05;
+    int planeGridSize = 10;
     int planeColumns = planeWidth / planeGridSize;
     int planeRows = planeHeight / planeGridSize;
     
@@ -115,7 +115,9 @@ void ofApp::setup(){
     gui.add(initBackground.setup("initBackground",3,1,10));
     gui.add(fullScreen.setup("fullScreen",false));
     gui.add(bMirror.setup("bMirror",false));
-    
+    gui.add(noiseScale.setup("noiseScale",0.001,0,0.1));
+    gui.add(noiceSpeed.setup("noiceSpeed",0.1,0,0.1));
+    gui.add(masterNoiseScale.setup("masterNoiseScale",0.1,0,0.1));
     fullScreen.addListener(this, &ofApp::toggleFullScreen);
     gui.loadFromFile("settings.xml");
     
@@ -207,18 +209,25 @@ void ofApp::update(){
         }
     }
     
-    float noiseScale = ofMap(mouseX, 0, ofGetWidth(), 0, 0.1);
-    float noiseVel = ofGetElapsedTimef()*0.07;
+    
+    float noiseVel = ofGetElapsedTimef()*noiceSpeed;
     
     ofPixels & pixels = img.getPixels();
     int xRes = img.getWidth();
     int yRes = img.getHeight();
     findRipples();
     swapBuffers();
+    float _masterNoiseScale = masterNoiseScale;
+    
     for (int y=0; y<yRes; y++){
         for (int x=0; x<xRes; x++){
             int i = y * xRes + x;
-            pixels[i]  = 255 - ((r1[x][y]+0.5) * 255);
+            
+//            float noiseVelue = ofNoise(x * noiseScale, y * noiseScale, noiseVel);
+            
+//            pixels[i] = 255 * noiseVelue;
+//            pixels[i]  =  ( 255 - (((r1[x][y]+0.5)*(noiseVelue)) * 255) )  ;
+            pixels[i]  =  ( 255 - (((r1[x][y]+0.5)) * 255) )  ;
         }
     }
     
@@ -296,9 +305,14 @@ void ofApp::draw(){
     
     shader.begin();
     shader.setUniformTexture("tex0", fbo, 0);
+    shader.setUniform1f("time", ofGetElapsedTimef());
+    shader.setUniform1f("scale", noiseScale);
+    shader.setUniform1f("speed", noiceSpeed);
+    shader.setUniform1f("noiseScale", masterNoiseScale);
 #ifdef USE_VIDEO
     shader.setUniformTexture("tex1", videoFbo.getTexture(), 1);
 #else
+    
     shader.setUniformTexture("tex1", lImage, 1);
 #endif
     
@@ -333,7 +347,7 @@ void ofApp::draw(){
     if(bHide){
         videoFbo.draw(0,0,ofGetWidth()*0.3, ofGetHeight()*0.3);
         fbo.draw(0, 0,128,128);
-        img.draw(128, 0, 128,128);
+//        img.draw(128, 0, 128,128);
 //        for(int d = 0; d < kinects.size(); d++){
 //            float dwHD = 1920/4;
 //            float dhHD = 1080/4;
@@ -365,6 +379,8 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     switch(key){
+        case ' ':
+            break;
         case OF_KEY_TAB:
             bHide = !bHide;
             break;

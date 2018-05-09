@@ -1,3 +1,4 @@
+ofxAutoReloadedShader
 ofxCv
 ofxGui
 ofxHPVPlayer

@@ -5,10 +5,11 @@
 #include "ofxGui.h"
 #include "ofxKinectV2.h"
 #include "ofxSyphon.h"
-#define USE_VIDEO
+//#define USE_VIDEO
 #ifdef USE_VIDEO
 #include "ofxHPVPlayer.h"
 #endif
+#include "ofxAutoReloadedShader.h"
 class ofApp : public ofBaseApp{
 
 	public:
@@ -29,6 +30,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     ofImage img;
     ofShader shader;
+    
     ofPlanePrimitive plane;
     ofImage sImage;
 #ifdef USE_VIDEO
@@ -52,6 +54,9 @@ class ofApp : public ofBaseApp{
     ofxFloatSlider offsetZ;
     ofxFloatSlider power;
     ofxFloatSlider distance;
+    ofxFloatSlider noiseScale;
+    ofxFloatSlider noiceSpeed;
+    ofxFloatSlider masterNoiseScale;
     ofxToggle fullScreen;
     ofxToggle bMirror;
     ofxIntSlider initBackground;

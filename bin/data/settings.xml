@@ -10,10 +10,10 @@
 	</kinectV2_011840764847>
 <threshold>61.96</threshold>
 	<UnknownName>0</UnknownName>
-<offsetX>1040</offsetX>
-	<offsetY>340</offsetY>
+<offsetX>1032</offsetX>
+	<offsetY>344</offsetY>
 	<offsetZ>420</offsetZ>
-<fps>58.6041</fps>
+<fps>60.0238</fps>
 <kinectV2_000261564947>
 		<minDistance>500</minDistance>
 		<maxDistance>6000</maxDistance>
@@ -33,4 +33,7 @@
 	<fullScreen>0</fullScreen>
 	<bMirror>0</bMirror>
 <bLearnBakground>1</bLearnBakground>
+<noiseScale>0.008</noiseScale>
+<noiceSpeed>0.037</noiceSpeed>
+	<masterNoiseScale>0.0025</masterNoiseScale>
 </group>
