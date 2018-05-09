@@ -5836,6 +5836,368 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
+			<key>D736C6549BC0F3AC000D3E46</key>
+			<dict>
+				<key>fileRef</key>
+				<string>8CA80722114B53E79572651A</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>8CA80722114B53E79572651A</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxHPVPLayer.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/ofxHPVPLayer.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>8FF82F2EF8EE6573368278E4</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>HPVManager.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/HPVManager.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>830C7C3DF5B5E3A6340D0712</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ThreadSafeQueue.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/ThreadSafeQueue.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>79CDBBBAC046662F1A156238</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>HPVPlayer.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/HPVPlayer.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>CEA24AEB74ADBDFB0AE926F3</key>
+			<dict>
+				<key>fileRef</key>
+				<string>9144546E5481902E77870A52</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>9144546E5481902E77870A52</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.c</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>lz4.c</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/lz4.c</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>10BDAD77820FDBCBF144C28A</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>lz4hc.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/lz4hc.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>2E2EF60AF55D0A39EC1BAC78</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>Log.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/Log.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>016251DAB9DFE7D35B003202</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>HPVHeader.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/HPVHeader.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>35DA5269C69B66D5ACFC9B9C</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>Timer.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/Timer.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>BAA2B779786EEE23A27F8E12</key>
+			<dict>
+				<key>fileRef</key>
+				<string>E73D5C2347DF2FD4913DD347</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>E73D5C2347DF2FD4913DD347</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>HPVManager.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/HPVManager.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>3636DB6F4CB449A9812ADD41</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>HPVRenderBridge.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/HPVRenderBridge.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>9B435A4BA28BC6C8A0546147</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>HPVEvent.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/HPVEvent.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>69E3BC33896175B84A8DFCDD</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>lz4.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/lz4.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>B4217C980B30B54D3489F8BE</key>
+			<dict>
+				<key>fileRef</key>
+				<string>D137AEF3D0655BB96F6362DD</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>D137AEF3D0655BB96F6362DD</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>HPVRenderBridge.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/HPVRenderBridge.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>B16D9E639BA367E8246322E8</key>
+			<dict>
+				<key>fileRef</key>
+				<string>2BF170BF7B01F0B07513390B</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>2BF170BF7B01F0B07513390B</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.c</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>lz4hc.c</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/lz4hc.c</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>532314368EF973BD38C13AED</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxHPVPlayer.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/ofxHPVPlayer.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>AF62A2E601FF59EB71F6D587</key>
+			<dict>
+				<key>fileRef</key>
+				<string>3A5C80FF2CE2833134509749</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>3A5C80FF2CE2833134509749</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>HPVPlayer.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/HPVPlayer.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>23B354DE9B2F7CC92FB1652E</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>697B169C0F7B7A765EB7BECB</string>
+					<string>3A5C80FF2CE2833134509749</string>
+					<string>532314368EF973BD38C13AED</string>
+					<string>2BF170BF7B01F0B07513390B</string>
+					<string>D137AEF3D0655BB96F6362DD</string>
+					<string>69E3BC33896175B84A8DFCDD</string>
+					<string>9B435A4BA28BC6C8A0546147</string>
+					<string>3636DB6F4CB449A9812ADD41</string>
+					<string>E73D5C2347DF2FD4913DD347</string>
+					<string>35DA5269C69B66D5ACFC9B9C</string>
+					<string>016251DAB9DFE7D35B003202</string>
+					<string>2E2EF60AF55D0A39EC1BAC78</string>
+					<string>10BDAD77820FDBCBF144C28A</string>
+					<string>9144546E5481902E77870A52</string>
+					<string>79CDBBBAC046662F1A156238</string>
+					<string>830C7C3DF5B5E3A6340D0712</string>
+					<string>8FF82F2EF8EE6573368278E4</string>
+					<string>8CA80722114B53E79572651A</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>src</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>8A339919FA87B6FC5F1F0447</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>23B354DE9B2F7CC92FB1652E</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>ofxHPVPlayer</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>1F8B3F1A5890DC53B7A56452</key>
+			<dict>
+				<key>fileRef</key>
+				<string>697B169C0F7B7A765EB7BECB</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>697B169C0F7B7A765EB7BECB</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>Log.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxHPVPlayer/src/Log.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
 			<key>89449E3044D456F7DE7BEA14</key>
 			<dict>
 				<key>explicitFileType</key>
@@ -6903,6 +7265,7 @@
 				<array>
 					<string>6025FAF6414C2CA589764D26</string>
 					<string>480A780D8D0308AE4A368801</string>
+					<string>8A339919FA87B6FC5F1F0447</string>
 					<string>B3F1A3EBAB4324C5451FC9A3</string>
 					<string>A0B90D3B0ADB9C1716816714</string>
 					<string>E6053AB7FEC63D5F83825B88</string>
@@ -7072,6 +7435,7 @@
 						<string>../../../addons/ofxCv/libs/CLD/include/CLD</string>
 						<string>../../../addons/ofxCv/src</string>
 						<string>../../../addons/ofxGui/src</string>
+						<string>../../../addons/ofxHPVPlayer/src</string>
 						<string>../../../addons/ofxKinectV2/libs</string>
 						<string>../../../addons/ofxKinectV2/libs/libfreenect2</string>
 						<string>../../../addons/ofxKinectV2/libs/libfreenect2/include</string>
@@ -7206,6 +7570,7 @@
 						<string>../../../addons/ofxCv/libs/CLD/include/CLD</string>
 						<string>../../../addons/ofxCv/src</string>
 						<string>../../../addons/ofxGui/src</string>
+						<string>../../../addons/ofxHPVPlayer/src</string>
 						<string>../../../addons/ofxKinectV2/libs</string>
 						<string>../../../addons/ofxKinectV2/libs/libfreenect2</string>
 						<string>../../../addons/ofxKinectV2/libs/libfreenect2/include</string>
@@ -7349,6 +7714,13 @@
 					<string>483908258D00B98B4BE69F07</string>
 					<string>F285EB3169F1566CA3D93C20</string>
 					<string>837220E80EB56CD44AD27F2A</string>
+					<string>1F8B3F1A5890DC53B7A56452</string>
+					<string>AF62A2E601FF59EB71F6D587</string>
+					<string>B16D9E639BA367E8246322E8</string>
+					<string>B4217C980B30B54D3489F8BE</string>
+					<string>BAA2B779786EEE23A27F8E12</string>
+					<string>CEA24AEB74ADBDFB0AE926F3</string>
+					<string>D736C6549BC0F3AC000D3E46</string>
 					<string>E3EFFFFCBBAF63136866B6B7</string>
 					<string>C3FADE9F8634F788D575CC7B</string>
 					<string>D7250AD84540A0623627DC28</string>
@@ -7494,6 +7866,7 @@
 						<string>../../../addons/ofxCv/libs/CLD/include/CLD</string>
 						<string>../../../addons/ofxCv/src</string>
 						<string>../../../addons/ofxGui/src</string>
+						<string>../../../addons/ofxHPVPlayer/src</string>
 						<string>../../../addons/ofxKinectV2/libs</string>
 						<string>../../../addons/ofxKinectV2/libs/libfreenect2</string>
 						<string>../../../addons/ofxKinectV2/libs/libfreenect2/include</string>
@@ -7620,6 +7993,7 @@
 						<string>../../../addons/ofxCv/libs/CLD/include/CLD</string>
 						<string>../../../addons/ofxCv/src</string>
 						<string>../../../addons/ofxGui/src</string>
+						<string>../../../addons/ofxHPVPlayer/src</string>
 						<string>../../../addons/ofxKinectV2/libs</string>
 						<string>../../../addons/ofxKinectV2/libs/libfreenect2</string>
 						<string>../../../addons/ofxKinectV2/libs/libfreenect2/include</string>

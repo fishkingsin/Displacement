@@ -10,14 +10,37 @@
 //int res             = 8;
 float heightMulti = 8;
 float xm = 0, ym = 0;
-
+#ifdef USE_VIDEO
+#else
+#endif
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetupScreenOrtho();
     sImage.load("tunnel_s.png");
+#ifdef USE_VIDEO
+    
+//    HPV::InitHPVEngine();
+//
+//    /* Create resources for new player */
+//    player.init(HPV::NewPlayer());
+    
+    /* Try to load file and start playback */
+    if (player.load("movie.mov"))
+    {
+        player.setUseTexture(true);
+        
+        player.setLoopState(OF_LOOP_NORMAL);
+        player.play();
+    }else{
+        std::exit(-1);
+    }
+    fbo.allocate(player.getWidth(),player.getHeight());
+#else
     lImage.load("tunnel.png");
-    img.allocate(sImage.getWidth(),sImage.getHeight(), OF_IMAGE_GRAYSCALE);
     fbo.allocate(lImage.getWidth(),lImage.getHeight());
+#endif
+    img.allocate(sImage.getWidth(),sImage.getHeight(), OF_IMAGE_GRAYSCALE);
+
     dot.load("dot.png");
     shader.load("shader");
     shader.setUniformTexture("tex0", fbo, 0);
@@ -29,7 +52,13 @@ void ofApp::setup(){
     int planeRows = planeHeight / planeGridSize;
     
     plane.set(planeWidth, planeHeight, planeColumns, planeRows, OF_PRIMITIVE_TRIANGLES);
+    #ifdef USE_VIDEO
+    plane.mapTexCoordsFromTexture(player.getTexture());
+    #else
     plane.mapTexCoordsFromTexture(lImage.getTexture());
+    #endif
+    
+    
     int xRes = img.getWidth();
     int yRes = img.getHeight();
     r0 = new float* [xRes];
@@ -101,12 +130,26 @@ void ofApp::toggleFullScreen(bool &b){
     ofSetFullscreen(b);
 }
 //--------------------------------------------------------------
+void ofApp::exit()
+{
+#ifdef USE_VIDEO
+    /* Cleanup and destroy HPV Engine upon exit */
+//    HPV::DestroyHPVEngine();
+#endif
+}
+//--------------------------------------------------------------
 void ofApp::update(){
     if((ofGetElapsedTimef() - initBackground) > 3 && !binitBackground ){
         bLearnBakground = true;
         binitBackground = true;
     }
     fps = ofToString(ofGetFrameRate());
+    
+#ifdef USE_VIDEO
+    player.update();
+//    HPV::Update();
+#else
+#endif
     for(int d = 0; d < kinects.size(); d++){
         kinects[d]->update();
         if( kinects[d]->isFrameNew() ){
@@ -176,13 +219,21 @@ void ofApp::update(){
     
     
     img.update();
-    
+#ifdef USE_VIDEO
+    xm = ofGetMouseX()/(ofGetWidth()/player.getWidth());
+    ym = ofGetMouseY()/(ofGetHeight()/player.getHeight());
+    fbo.begin();
+    img.draw(0, 0, player.getWidth(), player.getHeight());
+    fbo.end();
+#else
     xm = ofGetMouseX()/(ofGetWidth()/lImage.getWidth());
     ym = ofGetMouseY()/(ofGetHeight()/lImage.getHeight());
     fbo.begin();
     img.draw(0, 0, lImage.getWidth(), lImage.getHeight());
-//    dot.draw(xm-(dot.getWidth()*0.5), ym-(dot.getHeight()*0.5));
+    //    dot.draw(xm-(dot.getWidth()*0.5), ym-(dot.getHeight()*0.5));
     fbo.end();
+#endif
+    
 }
 void ofApp::findRipples(){
     int xRes = img.getWidth();
@@ -240,7 +291,12 @@ void ofApp::draw(){
     
     shader.begin();
     shader.setUniformTexture("tex0", fbo, 0);
+#ifdef USE_VIDEO
+    shader.setUniformTexture("tex1", player.getTexture(), 1);
+#else
     shader.setUniformTexture("tex1", lImage, 1);
+#endif
+    
     shader.setUniform1f("scale", scale);
     ofPushMatrix();
     
@@ -270,6 +326,7 @@ void ofApp::draw(){
 //    screen.end();
     server.publishScreen();
     if(bHide){
+        player.draw(0,0,ofGetWidth(), ofGetHeight());
         fbo.draw(0, 0,128,128);
         img.draw(128, 0, 128,128);
 //        for(int d = 0; d < kinects.size(); d++){
@@ -367,3 +424,32 @@ void ofApp::gotMessage(ofMessage msg){
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
+
+//--------------------------------------------------------------
+#ifdef USE_VIDEO
+//void ofApp::onHPVEvent(const HPVEvent& event)
+//{
+//    switch (event.type)
+//    {
+//        case HPV::HPVEventType::HPV_EVENT_PLAY:
+//            cout << "'" << event.player->getFilename() << "': play event" << endl;
+//            break;
+//        case HPV::HPVEventType::HPV_EVENT_PAUSE:
+//            cout << "'" << event.player->getFilename() << "': pause event" << endl;
+//            break;
+//        case HPV::HPVEventType::HPV_EVENT_RESUME:
+//            cout << "'" << event.player->getFilename() << "': resume event" << endl;
+//            break;
+//        case HPV::HPVEventType::HPV_EVENT_STOP:
+//            cout << "'" << event.player->getFilename() << "': stop event" << endl;
+//            break;
+//        case HPV::HPVEventType::HPV_EVENT_LOOP:
+//            cout << "'" << event.player->getFilename() << "': loop event" << endl;
+//            break;
+//        case HPV::HPVEventType::HPV_EVENT_NUM_TYPES:
+//        default:
+//            break;
+//    }
+//}
+
+#endif

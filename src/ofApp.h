@@ -5,13 +5,17 @@
 #include "ofxGui.h"
 #include "ofxKinectV2.h"
 #include "ofxSyphon.h"
+#define USE_VIDEO
+#ifdef USE_VIDEO
+//#include "ofxHPVPlayer.h"
+#endif
 class ofApp : public ofBaseApp{
 
 	public:
 		void setup();
 		void update();
 		void draw();
-
+        void exit();
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
@@ -27,8 +31,12 @@ class ofApp : public ofBaseApp{
     ofShader shader;
     ofPlanePrimitive plane;
     ofImage sImage;
+#ifdef USE_VIDEO
+    ofVideoPlayer player;
+//    void onHPVEvent(const HPVEvent& event);
+#else
     ofImage lImage;
-    
+#endif
     void findRipples();
     void swapBuffers();
     void makeRipples(float _x, float  _y);

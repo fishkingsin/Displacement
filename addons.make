@@ -1,5 +1,6 @@
 ofxCv
 ofxGui
+ofxHPVPlayer
 ofxKinectV2
 ofxOpenCv
 ofxOsc
