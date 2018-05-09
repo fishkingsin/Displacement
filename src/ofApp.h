@@ -7,7 +7,7 @@
 #include "ofxSyphon.h"
 #define USE_VIDEO
 #ifdef USE_VIDEO
-//#include "ofxHPVPlayer.h"
+#include "ofxHPVPlayer.h"
 #endif
 class ofApp : public ofBaseApp{
 
@@ -32,8 +32,8 @@ class ofApp : public ofBaseApp{
     ofPlanePrimitive plane;
     ofImage sImage;
 #ifdef USE_VIDEO
-    ofVideoPlayer player;
-//    void onHPVEvent(const HPVEvent& event);
+    ofxHPVPlayer player;
+    void onHPVEvent(const HPVEvent& event);
 #else
     ofImage lImage;
 #endif
@@ -82,7 +82,7 @@ class ofApp : public ofBaseApp{
     ofCamera cam;
     ofFbo fbo;
     ofFbo kinectsFbo;
-    ofFbo screenFbo;
+    ofFbo videoFbo;
     ofPixels pixels;
     ofImage dot;
     ofxSyphonServer server;

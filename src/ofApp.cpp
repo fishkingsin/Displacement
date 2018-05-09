@@ -15,22 +15,24 @@ float xm = 0, ym = 0;
 #endif
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofSetupScreenOrtho();
+    ofSetVerticalSync(true);
+    
     sImage.load("tunnel_s.png");
 #ifdef USE_VIDEO
     
-//    HPV::InitHPVEngine();
-//
-//    /* Create resources for new player */
-//    player.init(HPV::NewPlayer());
+    HPV::InitHPVEngine();
+
+    /* Create resources for new player */
+    player.init(HPV::NewPlayer());
     
     /* Try to load file and start playback */
-    if (player.load("movie.mov"))
+    if (player.load("movie.hpv"))
     {
-        player.setUseTexture(true);
+//        player.setUseTexture(true);
         
         player.setLoopState(OF_LOOP_NORMAL);
         player.play();
+        videoFbo.allocate(player.getWidth(), player.getHeight(), GL_RGB);
     }else{
         std::exit(-1);
     }
@@ -53,7 +55,7 @@ void ofApp::setup(){
     
     plane.set(planeWidth, planeHeight, planeColumns, planeRows, OF_PRIMITIVE_TRIANGLES);
     #ifdef USE_VIDEO
-    plane.mapTexCoordsFromTexture(player.getTexture());
+    plane.mapTexCoordsFromTexture(videoFbo.getTexture());
     #else
     plane.mapTexCoordsFromTexture(lImage.getTexture());
     #endif
@@ -134,7 +136,7 @@ void ofApp::exit()
 {
 #ifdef USE_VIDEO
     /* Cleanup and destroy HPV Engine upon exit */
-//    HPV::DestroyHPVEngine();
+    HPV::DestroyHPVEngine();
 #endif
 }
 //--------------------------------------------------------------
@@ -146,8 +148,11 @@ void ofApp::update(){
     fps = ofToString(ofGetFrameRate());
     
 #ifdef USE_VIDEO
-    player.update();
-//    HPV::Update();
+//    player.update();
+    HPV::Update();
+    videoFbo.begin();
+    player.draw(0,0,player.getWidth(),player.getHeight());
+    videoFbo.end();
 #else
 #endif
     for(int d = 0; d < kinects.size(); d++){
@@ -292,7 +297,7 @@ void ofApp::draw(){
     shader.begin();
     shader.setUniformTexture("tex0", fbo, 0);
 #ifdef USE_VIDEO
-    shader.setUniformTexture("tex1", player.getTexture(), 1);
+    shader.setUniformTexture("tex1", videoFbo.getTexture(), 1);
 #else
     shader.setUniformTexture("tex1", lImage, 1);
 #endif
@@ -326,7 +331,7 @@ void ofApp::draw(){
 //    screen.end();
     server.publishScreen();
     if(bHide){
-        player.draw(0,0,ofGetWidth(), ofGetHeight());
+        videoFbo.draw(0,0,ofGetWidth()*0.3, ofGetHeight()*0.3);
         fbo.draw(0, 0,128,128);
         img.draw(128, 0, 128,128);
 //        for(int d = 0; d < kinects.size(); d++){
@@ -427,29 +432,29 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 //--------------------------------------------------------------
 #ifdef USE_VIDEO
-//void ofApp::onHPVEvent(const HPVEvent& event)
-//{
-//    switch (event.type)
-//    {
-//        case HPV::HPVEventType::HPV_EVENT_PLAY:
-//            cout << "'" << event.player->getFilename() << "': play event" << endl;
-//            break;
-//        case HPV::HPVEventType::HPV_EVENT_PAUSE:
-//            cout << "'" << event.player->getFilename() << "': pause event" << endl;
-//            break;
-//        case HPV::HPVEventType::HPV_EVENT_RESUME:
-//            cout << "'" << event.player->getFilename() << "': resume event" << endl;
-//            break;
-//        case HPV::HPVEventType::HPV_EVENT_STOP:
-//            cout << "'" << event.player->getFilename() << "': stop event" << endl;
-//            break;
-//        case HPV::HPVEventType::HPV_EVENT_LOOP:
-//            cout << "'" << event.player->getFilename() << "': loop event" << endl;
-//            break;
-//        case HPV::HPVEventType::HPV_EVENT_NUM_TYPES:
-//        default:
-//            break;
-//    }
-//}
+void ofApp::onHPVEvent(const HPVEvent& event)
+{
+    switch (event.type)
+    {
+        case HPV::HPVEventType::HPV_EVENT_PLAY:
+            cout << "'" << event.player->getFilename() << "': play event" << endl;
+            break;
+        case HPV::HPVEventType::HPV_EVENT_PAUSE:
+            cout << "'" << event.player->getFilename() << "': pause event" << endl;
+            break;
+        case HPV::HPVEventType::HPV_EVENT_RESUME:
+            cout << "'" << event.player->getFilename() << "': resume event" << endl;
+            break;
+        case HPV::HPVEventType::HPV_EVENT_STOP:
+            cout << "'" << event.player->getFilename() << "': stop event" << endl;
+            break;
+        case HPV::HPVEventType::HPV_EVENT_LOOP:
+            cout << "'" << event.player->getFilename() << "': loop event" << endl;
+            break;
+        case HPV::HPVEventType::HPV_EVENT_NUM_TYPES:
+        default:
+            break;
+    }
+}
 
 #endif

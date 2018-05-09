@@ -1,0 +1,36 @@
+<group>
+	<damping>0.991408</damping>
+	<scale>1000</scale>
+	<power>0.0050095</power>
+	<distance>95.525</distance>
+<group/>
+<kinectV2_011840764847>
+		<minDistance>489.796</minDistance>
+		<maxDistance>1959.18</maxDistance>
+	</kinectV2_011840764847>
+<threshold>61.96</threshold>
+	<UnknownName>0</UnknownName>
+<offsetX>1040</offsetX>
+	<offsetY>340</offsetY>
+	<offsetZ>420</offsetZ>
+<fps>58.6041</fps>
+<kinectV2_000261564947>
+		<minDistance>500</minDistance>
+		<maxDistance>6000</maxDistance>
+	</kinectV2_000261564947>
+	<kinectV2_511564642542>
+		<minDistance>918.367</minDistance>
+		<maxDistance>4102.04</maxDistance>
+	</kinectV2_511564642542>
+<minArea>3264.88</minArea>
+	<maxArea>40392.5</maxArea>
+<cooldownInterval>0.0400098</cooldownInterval>
+<kinectV2_020882143647>
+		<minDistance>500</minDistance>
+		<maxDistance>1224.49</maxDistance>
+	</kinectV2_020882143647>
+	<initBackground>3</initBackground>
+	<fullScreen>0</fullScreen>
+	<bMirror>0</bMirror>
+<bLearnBakground>1</bLearnBakground>
+</group>
