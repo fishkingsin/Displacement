@@ -51,6 +51,7 @@ class ofApp : public ofBaseApp{
     
     ofxFloatSlider offsetX;
     ofxFloatSlider offsetY;
+    ofxFloatSlider offsetTrackingY;
     ofxFloatSlider offsetZ;
     ofxFloatSlider power;
     ofxFloatSlider distance;
@@ -59,6 +60,7 @@ class ofApp : public ofBaseApp{
     ofxFloatSlider masterNoiseScale;
     ofxToggle fullScreen;
     ofxToggle bMirror;
+    ofxToggle bInvert;
     ofxIntSlider initBackground;
     void toggleFullScreen(bool &b);
     bool binitBackground;

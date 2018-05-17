@@ -16,7 +16,8 @@ float xm = 0, ym = 0;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetVerticalSync(true);
-    ofEnableAntiAliasing();
+//    ofEnableAntiAliasing();
+//    ofEnableSmoothing();
     sImage.load("tunnel_s.png");
 #ifdef USE_VIDEO
     
@@ -43,13 +44,25 @@ void ofApp::setup(){
 #endif
     img.allocate(sImage.getWidth(),sImage.getHeight(), OF_IMAGE_GRAYSCALE);
 
+    
+    if(!colorImg.bAllocated){
+        int w = 512;//kinects[d]->getDepthPixels().getWidth()*kinects.size()*0.5;
+        int h = 212;//kinects[d]->getDepthPixels().getHeight()*0.5;
+        kinectsFbo.allocate(w,h,GL_RGB);
+        colorImg.allocate(w, h);
+        grayImage.allocate(w, h);
+        grayBg.allocate(w, h);
+        grayDiff.allocate(w, h);
+        pixels.allocate(w, h, OF_IMAGE_COLOR);
+    }
+    
     dot.load("dot.png");
     shader.load("shader");
     shader.setUniformTexture("tex0", fbo, 0);
     float planeScale = 1;//0.85;
     int planeWidth = ofGetWidth() * planeScale;
-    int planeHeight = ofGetHeight() * planeScale * 1.05;
-    int planeGridSize = 10;
+    int planeHeight = ofGetHeight() * planeScale ;
+    int planeGridSize = 4;
     int planeColumns = planeWidth / planeGridSize;
     int planeRows = planeHeight / planeGridSize;
     
@@ -80,30 +93,14 @@ void ofApp::setup(){
         }
     }
     
-    ofxKinectV2 tmp;
-    vector <ofxKinectV2::KinectDeviceInfo> deviceList = tmp.getDeviceList();
     
-    //allocate for this many devices
-    kinects.resize(deviceList.size());
-    texDepth.resize(kinects.size());
-    
-    
-    gui.setup("", "settings.xml", 10, 100); // most of the time you don't need a name
-    //Note you don't have to use ofxKinectV2 as a shared pointer, but if you want to have it in a vector ( ie: for multuple ) it needs to be.
-    for(int d = 0; d < kinects.size(); d++){
-        kinects[d] = shared_ptr <ofxKinectV2> (new ofxKinectV2());
-        ofLogWarning() << deviceList[d].serial;
-        kinects[d]->open(deviceList[d].serial);
-        
-        gui.add(kinects[d]->params);
-    }
-    //testing
-    
+    gui.setup("", "settings.xml", 10, 100); // most of the time you don't
     gui.add(fps.setup("fps",""));
     gui.add(offsetX.setup("offsetX", 0, -2000, 2000));
     gui.add(offsetY.setup("offsetY", 0, -2000, 1000));
     gui.add(offsetZ.setup("offsetZ", 0, -2000, 2000));
     gui.add(damping.setup("damping", 0.999, 0.9, 0.9999));
+    gui.add(offsetTrackingY.setup("offsetTrackingY", 0, -1000, 1000));
     gui.add(scale.setup("scale", 10, 1, 1000));
     gui.add(power.setup("power", 0.1, 0.00001, 0.1));
     gui.add(distance.setup("distance", 3, 1, 200));
@@ -115,8 +112,9 @@ void ofApp::setup(){
     gui.add(initBackground.setup("initBackground",3,1,10));
     gui.add(fullScreen.setup("fullScreen",false));
     gui.add(bMirror.setup("bMirror",false));
+    gui.add(bInvert.setup("bInvert",false));
     gui.add(noiseScale.setup("noiseScale",0.001,0,0.1));
-    gui.add(noiceSpeed.setup("noiceSpeed",0.1,0,0.1));
+    gui.add(noiceSpeed.setup("noiceSpeed",0.1,0,1));
     gui.add(masterNoiseScale.setup("masterNoiseScale",0.1,0,0.1));
     fullScreen.addListener(this, &ofApp::toggleFullScreen);
     gui.loadFromFile("settings.xml");
@@ -160,16 +158,7 @@ void ofApp::update(){
     for(int d = 0; d < kinects.size(); d++){
         kinects[d]->update();
         if( kinects[d]->isFrameNew() ){
-            if(!colorImg.bAllocated){
-                int w = kinects[d]->getDepthPixels().getWidth()*kinects.size()*0.5;
-                int h = kinects[d]->getDepthPixels().getHeight()*0.5;
-                kinectsFbo.allocate(w,h,GL_RGB);
-                colorImg.allocate(w, h);
-                grayImage.allocate(w, h);
-                grayBg.allocate(w, h);
-                grayDiff.allocate(w, h);
-                pixels.allocate(w, h, OF_IMAGE_COLOR);
-            }
+            
             texDepth[d].loadData( kinects[d]->getDepthPixels() );
         }
     }
@@ -200,7 +189,7 @@ void ofApp::update(){
         
         for (int i = 0; i < contourFinder.nBlobs; i++){
             ofPoint input = ofPoint((contourFinder.blobs[i].centroid.x / kinectsFbo.getWidth()) *ofGetWidth() ,
-                                    (contourFinder.blobs[i].centroid.y / kinectsFbo.getHeight()) *ofGetHeight() );
+                                    (contourFinder.blobs[i].centroid.y / kinectsFbo.getHeight()) *ofGetHeight() + offsetTrackingY);
             if(abs(ofGetElapsedTimef()-coolDown) > cooldownInterval){
                 makeRipples(input.x, input.y);
                 coolDown = ofGetElapsedTimef();
@@ -210,29 +199,34 @@ void ofApp::update(){
     }
     
     
-    float noiseVel = ofGetElapsedTimef()*noiceSpeed;
+//    float noiseVel = ofGetElapsedTimef()*noiceSpeed;
     
-    ofPixels & pixels = img.getPixels();
+    
     int xRes = img.getWidth();
     int yRes = img.getHeight();
     findRipples();
     swapBuffers();
-    float _masterNoiseScale = masterNoiseScale;
-    
-    for (int y=0; y<yRes; y++){
-        for (int x=0; x<xRes; x++){
-            int i = y * xRes + x;
-            
-//            float noiseVelue = ofNoise(x * noiseScale, y * noiseScale, noiseVel);
-            
-//            pixels[i] = 255 * noiseVelue;
-//            pixels[i]  =  ( 255 - (((r1[x][y]+0.5)*(noiseVelue)) * 255) )  ;
-            pixels[i]  =  ( 255 - (((r1[x][y]+0.5)) * 255) )  ;
+//    float _masterNoiseScale = masterNoiseScale;
+    if(!bInvert){
+        for (int y=0; y<yRes; y++){
+            for (int x=0; x<xRes; x++){
+                int i = y * xRes + x;
+                img.getPixels()[i]  =  ( (((r1[x][y]+0.5)) * 255) )  ;
+            }
+        }
+        
+    }else{
+        for (int y=0; y<yRes; y++){
+            for (int x=0; x<xRes; x++){
+                int i = y * xRes + x;
+                img.getPixels()[i]  =  ( 255 - (((r1[x][y]+0.5)) * 255) )  ;
+            }
         }
     }
     
     
     img.update();
+//    ofEnableAlphaBlending();
 #ifdef USE_VIDEO
     xm = ofGetMouseX()/(ofGetWidth()/player.getWidth());
     ym = ofGetMouseY()/(ofGetHeight()/player.getHeight());
@@ -247,6 +241,7 @@ void ofApp::update(){
     //    dot.draw(xm-(dot.getWidth()*0.5), ym-(dot.getHeight()*0.5));
     fbo.end();
 #endif
+//    ofDisableAntiAliasing();
     
 }
 void ofApp::findRipples(){
@@ -295,9 +290,9 @@ void ofApp::makeRipples(float _x, float  _y){
 }
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+//    ofEnableAntiAliasing();
     glEnable(GL_DEPTH_TEST);
-    ofEnableAlphaBlending();
+//    ofEnableAlphaBlending();
     cam.begin();
     // bind our texture. in our shader this will now be tex0 by default
     // so we can just go ahead and access it there.
@@ -340,12 +335,13 @@ void ofApp::draw(){
     cam.end();
     
     glDisable(GL_DEPTH_TEST);
-    ofDisableAlphaBlending();
+//    ofDisableAlphaBlending();
     ofSetColor(ofColor::white);
 //    screen.end();
+//    ofDisableAntiAliasing();
     server.publishScreen();
     if(bHide){
-        videoFbo.draw(0,0,ofGetWidth()*0.3, ofGetHeight()*0.3);
+//        videoFbo.draw(0,0,ofGetWidth()*0.3, ofGetHeight()*0.3);
         fbo.draw(0, 0,128,128);
 //        img.draw(128, 0, 128,128);
 //        for(int d = 0; d < kinects.size(); d++){
@@ -367,7 +363,7 @@ void ofApp::draw(){
         for (int i = 0; i < contourFinder.nBlobs; i++){
             ofPushMatrix();
             ofPoint input = ofPoint((contourFinder.blobs[i].centroid.x / grayImage.getWidth()) *ofGetWidth() ,
-                                    (contourFinder.blobs[i].centroid.y / grayImage.getHeight()) *ofGetHeight() );
+                                    (contourFinder.blobs[i].centroid.y / grayImage.getHeight()) *ofGetHeight() + offsetTrackingY);
             ofTranslate(input);
             ofDrawAxis(10);
             ofPopMatrix();

@@ -1,8 +1,8 @@
 <group>
 	<damping>0.991408</damping>
 	<scale>1000</scale>
-	<power>0.0050095</power>
-	<distance>95.525</distance>
+	<power>0.0505049</power>
+	<distance>6.97</distance>
 <group/>
 <kinectV2_011840764847>
 		<minDistance>489.796</minDistance>
@@ -10,10 +10,10 @@
 	</kinectV2_011840764847>
 <threshold>61.96</threshold>
 	<UnknownName>0</UnknownName>
-<offsetX>1032</offsetX>
-	<offsetY>344</offsetY>
-	<offsetZ>420</offsetZ>
-<fps>60.0238</fps>
+<offsetX>840</offsetX>
+	<offsetY>295</offsetY>
+	<offsetZ>480</offsetZ>
+<fps>15.6592</fps>
 <kinectV2_000261564947>
 		<minDistance>500</minDistance>
 		<maxDistance>6000</maxDistance>
@@ -32,8 +32,10 @@
 	<initBackground>3</initBackground>
 	<fullScreen>0</fullScreen>
 	<bMirror>0</bMirror>
-<bLearnBakground>1</bLearnBakground>
+<bLearnBakground>0</bLearnBakground>
 <noiseScale>0.008</noiseScale>
 <noiceSpeed>0.037</noiceSpeed>
 	<masterNoiseScale>0.0025</masterNoiseScale>
+<offsetTrackingY>0</offsetTrackingY>
+	<bInvert>0</bInvert>
 </group>
